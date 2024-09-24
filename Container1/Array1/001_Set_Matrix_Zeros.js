@@ -99,12 +99,6 @@ function zeroMatrix(matrix) {
   for (let i = matrix.length - 1; i > 0; i--) {
     for (let j = matrix[0].length - 1; j > 0; j--) {
       if (matrix[0][j] === 0 || matrix[i][0] === 0) {
-        if (j === 0) {
-          break;
-          if (col0 === 0 || matrix[i][0] === 0) {
-            matrix[i][j] = 0;
-          }
-        }
         matrix[i][j] = 0;
       }
     }
