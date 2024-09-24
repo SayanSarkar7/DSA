@@ -39,7 +39,7 @@ var setZeroes = function(matrix) {
  };
  */
 
-//Better Approach
+//Better Approach with TC = O[n2]
 /* We will take two one dimentional arrays representing rows and columns. If we find 0's in that matrix then the corresponding rowArray and columnArray will be marked.Finally we will check that if any one of rowArray and columnArray is marked then the element will be 0.  */
 
 /*
@@ -74,45 +74,67 @@ var setZeroes = function (matrix) {
 
 // same logic but different coding style
 
-
 function zeroMatrix(matrix) {
-    const n = matrix.length;
-    const m = matrix[0].length;
-    const row = new Array(n).fill(0); // row array
-    const col = new Array(m).fill(0); // col array
-
-    // Traverse the matrix:
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
-            if (matrix[i][j] === 0) {
-                // mark ith index of row with 1:
-                row[i] = 1;
-
-                // mark jth index of col with 1:
-                col[j] = 1;
-            }
+  const n = matrix.length;
+  const m = matrix[0].length;
+  // const row = new Array(n).fill(0); // row array
+  // const col = new Array(m).fill(0); // col array
+  let col0 = 1;
+  // Traverse the matrix:
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      if (matrix[i][j] === 0) {
+        if (j != 0) {
+          matrix[0][j] = 0;
+        } else {
+          col0 = 0;
         }
+        matrix[i][0] = 0;
+      }
     }
+  }
 
-    // Finally, mark all (i, j) as 0
-    // if row[i] or col[j] is marked with 1.
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
-            if (row[i] || col[j]) {
-                matrix[i][j] = 0;
-            }
+  // Finally, mark all (i, j) as 0
+  // if row[i] or col[j] is marked with 1.
+  for (let i = matrix.length - 1; i > 0; i--) {
+    for (let j = matrix[0].length - 1; j > 0; j--) {
+      if (matrix[0][j] === 0 || matrix[i][0] === 0) {
+        if (j === 0) {
+          break;
+          if (col0 === 0 || matrix[i][0] === 0) {
+            matrix[i][j] = 0;
+          }
         }
+        matrix[i][j] = 0;
+      }
     }
-
-    return matrix;
+  }
+  for (let j = 1; j < matrix[0].length; j++) {
+    if (matrix[0][0] === 0 || matrix[0][j] === 0) {
+      matrix[0][j]=0;
+    }
+  }
+  for(let i=0;i<matrix.length;i++){
+    if(matrix[i][0]===0 || col0===0){
+      matrix[i][0]=0;
+    }
+  }
+  return matrix;
 }
 
-const matrix = [[1, 1, 1], [1, 0, 1], [1, 1, 1]];
+const matrix = [
+  [1, 1, 1, 1],
+  [1, 0, 1, 1],
+  [1, 1, 0, 1],
+  [0, 1, 1, 1],
+];
 const ans = zeroMatrix(matrix);
 
 console.log("The Final matrix is:");
 for (const row of ans) {
-    console.log(row.join(" "));
-}    
+  console.log(row.join(" "));
+}
+
+
 
 
