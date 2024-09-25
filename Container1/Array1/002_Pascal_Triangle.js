@@ -34,8 +34,9 @@ for (let i = 1; i < row; i++) {
   ans = ans / i;
 }
 */
-// Printing Full Pascle Triangle 
-
+// -----------------------------------------------------
+// Printing Full Pascle Triangle with TC = O[~n3]
+/*
 function nCr(n, r) {
     let res = 1;
   
@@ -65,15 +66,60 @@ const n = 5;
 const ans = pascalTriangle(n);
 for (let i = 0; i < ans.length; i++) {
     console.log(ans[i]);
+}*/
 /*[ 1 ]
-[ 1, 1 ]
-[ 1, 2, 1 ]
-[ 1, 3, 3, 1 ]
-[ 1, 4, 6, 4, 1 ]*/
+   [ 1, 1 ]
+   [ 1, 2, 1 ]
+   [ 1, 3, 3, 1 ]
+   [ 1, 4, 6, 4, 1 ]*/
 /*console.log(ans[i].join(" ") + "n");
-1
-1 1
-1 2 1
-1 3 3 1
-1 4 6 4 1*/
-}
+   1
+   1 1
+   1 2 1
+   1 3 3 1
+   1 4 6 4 1*/
+// }
+//    ---------------------------------------------------
+
+//    optimal solution
+// let result = [];
+// let ans = 1;
+// result.push(ans);
+// for (let i = 1; i < row; i++) {
+// //   result.push(ans);
+//   let tempList = [];
+//   for (let j = 1; j <= i; j++) {
+//     ans = ans * (row - i);
+//     ans = ans / i;
+//     tempList.push(ans);
+//   }
+//   result.push(tempList);
+// }
+
+// TC = O[n2]
+var generate = function (numRows) {
+  let result = [];
+
+  for (let i = 0; i < numRows; i++) {
+    //   result.push(ans);
+    let ans = 1;
+    let tempList = [];
+    tempList.push(ans);
+    for (let j = 1; j <= i; j++) {
+      ans = ans * (i + 1 - j);
+      ans = ans / j;
+      console.log(ans);
+
+      tempList.push(ans);
+    }
+    result.push(tempList);
+  }
+  return result;
+};
+const n = 5;
+const ans = generate(n);
+console.log(ans);
+
+// for (let i = 0; i < ans.length; i++) {
+//     console.log(ans[i]);
+// }
