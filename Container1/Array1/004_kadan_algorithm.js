@@ -63,15 +63,24 @@ let arr=[-2,-3,4,3,2,1,5,-3];
  function maxSum(arr){
     let max=Number.MIN_SAFE_INTEGER;
     let sum=0;
+    let startIdx=-1;
+    let endIdx=-1;
+    let strt=-1;
     for(let i=0;i<arr.length;i++){
         sum+=arr[i];
         if(sum>max){
             max=sum;
+            startIdx=strt;
+            endIdx=i;
         }
         if(sum<0){
             sum=0;
+            strt=i+1;
         }
     }
+
+    console.log(arr.slice(startIdx,endIdx+1));
+    
     return max;
  }
 
