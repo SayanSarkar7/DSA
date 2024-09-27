@@ -53,3 +53,25 @@ var maxSubArray = function(nums) {
 
 */
 
+// Best Solution, i.e, Kadan's algorithm => Mainly Discards the negetive value, i.e, don't carry the negetive sum insted of make it zero. T.C = O[n]
+
+let arr=[-2,-3,4,3,2,1,5,-3];
+ let result=maxSum(arr);
+ console.log(result);
+ 
+
+ function maxSum(arr){
+    let max=Number.MIN_SAFE_INTEGER;
+    let sum=0;
+    for(let i=0;i<arr.length;i++){
+        sum+=arr[i];
+        if(sum>max){
+            max=sum;
+        }
+        if(sum<0){
+            sum=0;
+        }
+    }
+    return max;
+ }
+
